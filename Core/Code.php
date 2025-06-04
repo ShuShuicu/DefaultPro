@@ -27,13 +27,3 @@ function Postviews($archive)
     }
     echo $exist == 0 ? '暂无阅读' : $exist;
 }
-
-/**
- * VueScript
- */
-TTDF_Hook::add_action('load_foot', function () {
-?>
-
-    </script>
-<?php
-});
