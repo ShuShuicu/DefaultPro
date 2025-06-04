@@ -1,0 +1,241 @@
+@charset "utf-8";
+/* 
+    Typecho Theme Development Framework
+    TTDF · 一个面向小白简单易懂的Typecho主题模板开发框架
+    Copyright 2025 鼠子Tomoriゞ
+    https://github.com/ShuShuicu/Typecho-Theme-Development-Framework
+*/
+/* ========== 视图过渡动画 ========== */
+@view-transition {
+  navigation: auto;
+}
+
+/* 过渡动画 */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+::view-transition-old(root) {
+  animation-name: fade-out;
+  animation-timing-function: ease-out;
+}
+
+::view-transition-new(root) {
+  animation-name: fade-in;
+  animation-timing-function: ease-in;
+}
+
+/* 纯透明度动画 */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* ========== 全局变量 ========== */
+:root {
+  /* 颜色 */
+  --bg-color: #fffef5;
+  --text-color: #333;
+  --primary-color: #3354aa;
+  --secondary-color: #333;
+  --button-bg: var(--secondary-color);
+  --button-color: white;
+  --hover-bg: #6363630f;
+  
+  /* 尺寸 */
+  --img-radius: 4px;
+  --sidebar-offset: 10px;
+  --button-size: 50px;
+  
+  /* 效果 */
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --transition: 0.3s ease;
+}
+
+/* ========== 暗色主题 ========== */
+[theme="dark"] {
+  --bg-color: #333;
+  --text-color: #f5f5f5;
+  --primary-color: #aaccff;
+  --button-bg: #f5f5f5;
+  --button-color: #333;
+  --hover-bg: #6363631a;
+}
+
+/* ========== 基础元素 ========== */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  min-height: 100vh;
+  transition: 
+    background-color var(--transition),
+    color var(--transition);
+}
+
+/* ========== 布局组件 ========== */
+.sidebar {
+  position: sticky;
+  top: var(--sidebar-offset);
+  transition: top var(--transition);
+}
+
+.post-card {
+  transition: var(--transition);
+  
+  &:hover {
+    background-color: var(--hover-bg);
+    border-radius: var(--img-radius);
+  }
+}
+
+.post-content {
+  img, 
+  pre[class*="language-"].line-numbers {
+    border-radius: var(--img-radius);
+  }
+}
+
+.comment-author .avatar {
+  display: none;
+}
+
+body .post-content img,
+body .comment-content img,
+body .post-content video,
+body .comment-content video {
+  box-shadow: none;
+}
+
+/* ========== 暗色适配 ========== */
+body a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition);
+  
+  &:hover,
+  &:active {
+    color: var(--text-color);
+  }
+}
+
+body h1, h2, h3, h4, h5, h6, p {
+  color: var(--text-color);
+}
+
+body .post {
+  border-bottom: 1px solid var(--hover-bg);
+}
+
+body .post-meta a, body .post-content a, body .widget a, body .comment-content a {
+  border-bottom: 1px solid var(--hover-bg);
+}
+
+body .page-navigator a:hover {
+  background: var(--hover-bg);
+}
+
+body .page-navigator .current a {
+  color: var(--text-color);
+  background: var(--hover-bg);
+}
+
+#comments input[type="text"], input[type="email"], input[type="url"], input[type="password"], textarea {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+body #nav-menu a {
+  color: var(--primary-color);
+  border: 1px solid var(--hover-bg);
+  transition: background-color var(--transition); /* 添加过渡效果 */
+}
+
+/* 悬停和当前选中状态 */
+body #nav-menu a:hover,
+body #nav-menu a.current {
+  background-color: var(--hover-bg);
+  border-radius: 2px; /* 添加轻微圆角 */
+}
+
+body #header, 
+.post {
+  border-bottom: 1px solid var(--hover-bg);
+}
+
+body #logo,
+.post-excerpt {
+  color: var(--text-color);
+}
+body .comment-list li {
+  border: 1px solid var(--hover-bg);
+}
+body .comment-list li.comment-level-odd {
+  background: none;
+}
+body .comment-list li.comment-level-even {
+  background: none;
+}
+body .comment-list li.comment-by-author {
+  background: none;
+}
+
+/* ========== 主题切换按钮 ========== */
+#SwitchTheme {
+  --button-size: 40px;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: var(--button-size);
+  height: var(--button-size);
+  background: none;
+  color: var(--text-color);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 9999;
+  border: none;
+  outline: none;
+  padding: 0;
+  transition: transform var(--transition);
+  
+  &::before {
+    content: "☀️";
+    font-size: calc(var(--button-size) * 0.4);
+    transition: opacity var(--transition);
+  }
+  
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+[theme="dark"] #SwitchTheme::before {
+  content: "🌙";
+}
+
+/* ========== 兼容性处理 ========== */
+@supports not (view-transition-name: none) {
+  body {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(::view-transition-old(root), ::view-transition-new(root)) {
+    animation: none;
+  }
+  
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
