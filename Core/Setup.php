@@ -71,11 +71,23 @@ return [
                 ]
             ],
             [
-                // 自定义导航
-                'type' => 'Textarea',
+                // 是否启用自定义导航
+                'type' => 'Radio',
                 'name' => 'CustomNav',
-                'value' => '同款主题|https://github.com/ShuShuicu/DefaultPro',
+                'value' => 'false',
                 'label' => '自定义导航',
+                'description' => '是否启用自定义导航以替代默认自动获取页面链接。',
+                'options' => [
+                    'true' => '启动',
+                    'false' => '不启用'
+                ]
+            ],
+            [
+                // 自定义导航内容
+                'type' => 'Textarea',
+                'name' => 'CustomNavContent',
+                'value' => '首页|' . get_site_url(false) . "\n" . 'Default Pro|https://github.com/ShuShuicu/DefaultPro',
+                'label' => '导航内容',
                 'description' => '用于自定义顶部导航链接, 格式为 text|url 多个导航请换行。'
             ]
         ]

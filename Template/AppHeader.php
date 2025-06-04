@@ -13,7 +13,6 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
     <link rel="stylesheet" href="<?php get_theme_file_url('Assets/viewer/viewer.min.css?ver=') . get_theme_version(); ?>">
     <link rel="stylesheet" href="<?php get_theme_file_url('Assets/prism/' . get_options('PrismCss') . '?ver=') . get_theme_version(); ?>">
     <link rel="stylesheet" href="<?php get_theme_file_url('Assets/nprogress/nprogress.css?ver=') . get_theme_version(); ?>">
-    <script src="<?php get_theme_file_url('Assets/vue.global.min.js?ver=') . get_theme_version(); ?>"></script>
 </head>
 
 <body>
@@ -39,6 +38,29 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                 </div>
                 <div class="col-mb-12">
                     <nav id="nav-menu" class="clearfix" role="navigation">
+                        <?php if (get_options('CustomNav') == 'true') {
+                            $CustomNavContent = Get::Options('CustomNavContent');
+                            if (empty($CustomNavContent)) {
+                                $CustomNavContent = '首页|' . Get::SiteUrl(false);
+                            }
+                            $MenuItems = explode("\n", $CustomNavContent);
+                            foreach ($MenuItems as $item) {
+                                $parts = explode('|', trim($item));
+                                if (count($parts) == 2) {
+                                    list($name, $link) = $parts;
+                                    $class = is_page('index') ? ' class="current"' : '';
+                                    echo '<a href="' . $link . '"' . $class . ' title="' . $name . '">' . $name . '</a>';
+                                }
+                            }
+                        } else { ?>
+                            <a <?php if (is_page('index')) { ?> class="current" <?php }; ?> href="<?php get_site_url(); ?>">首页</a>
+                            <?php \Widget\Contents\Page\Rows::alloc()->to($pages); ?>
+                            <?php while ($pages->next()) { ?>
+                                <a <?php if ($this->is('page', $pages->slug)): ?> class="current" <?php endif; ?>
+                                    href="<?php $pages->permalink(); ?>"
+                                    title="<?php $pages->title(); ?>"><?php $pages->title(); ?></a>
+                        <?php };
+                        } ?>
                     </nav>
                 </div>
             </div><!-- end .row -->

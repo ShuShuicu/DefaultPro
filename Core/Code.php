@@ -28,38 +28,12 @@ function Postviews($archive)
     echo $exist == 0 ? '暂无阅读' : $exist;
 }
 
-
 /**
  * VueScript
  */
 TTDF_Hook::add_action('load_foot', function () {
 ?>
-    <script type="text/javascript">
-        const NavMenu = Vue.createApp({
-            data() {
-                return {
-                    links: `<?php Get::Options('CustomNav', true); ?>`,
-                };
-            },
-            computed: {
-                parsedLinks() {
-                    return this.links.split('\n').map(line => {
-                        const [text, url] = line.split('|');
-                        return {
-                            text,
-                            url
-                        };
-                    });
-                }
-            },
-            template: `
-                <a <?php if (is_page('index')) { ?> class="current" <?php }; ?> href="<?php get_site_url(); ?>">首页</a>
-                <a v-for="(link, index) in parsedLinks" :key="index" :href="link.url">
-                    {{ link.text }}
-                </a>
-            `,
-        });
-        NavMenu.mount('#nav-menu');
+
     </script>
 <?php
 });
