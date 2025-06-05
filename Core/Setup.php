@@ -22,6 +22,14 @@ return [
                 'description' => '在这里填入一个图片 URL 地址, 以代替 站点标题。'
             ],
             [
+                // Logo
+                'type' => 'Text',
+                'name' => 'IcpCode',
+                'value' => null,
+                'label' => '备案号',
+                'description' => '请输入网站Icp备案号将显示在网站底部。'
+            ],
+            [
                 // 文章代码高亮
                 'type' => 'Radio',
                 'name' => 'ArchiveStyle',
