@@ -52,7 +52,7 @@ function themeConfig($form)
             width: unset;
         }
 
-        /* TTDF 风格垂直选项卡 */
+        /* TTDF */
         * {
             margin: 0;
             padding: 0;
@@ -62,7 +62,6 @@ function themeConfig($form)
 
         /* 主容器 */
         .TTDF-container {
-            max-width: 1200px;
             margin: 20px auto;
             background: white;
             border-radius: 3px;
@@ -74,7 +73,7 @@ function themeConfig($form)
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border-bottom: 1px solid #dcdcde;
         }
 
@@ -253,6 +252,7 @@ function themeConfig($form)
             }
             
             .TTDF-nav-item {
+                text-align: center;
                 white-space: nowrap;
                 border-left: none;
                 border-bottom: 3px solid transparent;
