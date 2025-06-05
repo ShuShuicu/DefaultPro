@@ -22,6 +22,18 @@ return [
                 'description' => '在这里填入一个图片 URL 地址, 以代替 站点标题。'
             ],
             [
+                // 文章代码高亮
+                'type' => 'Radio',
+                'name' => 'ArchiveStyle',
+                'value' => 'excerpt',
+                'label' => '首页输出',
+                'description' => '设置首页文章列表输出风格是否为简介或全文',
+                'options' => [
+                    'excerpt' => '简介',
+                    'content' => '全文',
+                ]
+            ],
+            [
                 // 侧边栏显示
                 'type' => 'Checkbox',
                 'name' => 'SidebarBlock',
