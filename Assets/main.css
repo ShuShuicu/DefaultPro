@@ -175,6 +175,15 @@ body #logo,
 .post-excerpt {
   color: var(--text-color);
 }
+
+#search input[type="text"] {
+  background-color: var(--bg-color);
+  border: 2px solid var(--hover-bg);
+}
+#search input::placeholder {
+  color: var(--text-color);
+}
+
 body .comment-list li {
   border: 1px solid var(--hover-bg);
 }
