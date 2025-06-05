@@ -22,8 +22,14 @@ while (get_post_list()) {
                 </li>
             </ul>
             <div class="post-content post-excerpt" itemprop="articleBody">
-                <?php get_post_excerpt('200') ?>
-                <a href="<?php get_post_permalink() ?>">*阅读全文*</a>
+                <?php 
+                    if (get_options('ArchiveStyle') == 'content') {
+                        get_post_content();
+                    } else {
+                        get_post_excerpt(200);
+                        echo '<a href="' . get_post_permalink(false) . '">*阅读全文*</a>';
+                    }
+                ?>
             </div>
         </div>
     </article>
